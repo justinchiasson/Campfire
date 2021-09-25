@@ -7,8 +7,8 @@ import { default as mapping } from './mapping.json';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Amplify from 'aws-amplify'
-import config from './src/aws-exports'
+import Amplify from 'aws-amplify';
+import config from './src/aws-exports';
 import { AmplifyTheme, withAuthenticator } from 'aws-amplify-react-native';
 import HomeScreen from './app/screens/home';
 
@@ -19,7 +19,7 @@ function SignInScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Sign in</Text>
     </View>
-  )
+  );
 }
 
 const Tab = createBottomTabNavigator();
@@ -37,14 +37,14 @@ function App() {
   }
 
   return (
-      <ApplicationProvider {...eva} theme={{ ...eva.dark, ...theme }} customMapping={mapping}>
-        <NavigationContainer>
-          <Tab.Navigator initialRouteName="Home">
-            <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-            <Tab.Screen name="SignIn" component={SignInScreen} />
-          </Tab.Navigator>
-        </NavigationContainer>
-      </ApplicationProvider>
+    <ApplicationProvider {...eva} theme={{ ...eva.dark, ...theme }} customMapping={mapping}>
+      <NavigationContainer>
+        <Tab.Navigator initialRouteName="Home">
+          <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+          <Tab.Screen name="SignIn" component={SignInScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </ApplicationProvider>
   );
 }
 
