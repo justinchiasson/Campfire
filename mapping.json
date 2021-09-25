@@ -1,8 +1,9 @@
 {
     "strict": {
-      "text-font-family": "PlayfairDisplayBold",
+      "text-font-family": "OpenSans",
       "text-heading-1-font-size": 3,
       
-      "text-subtitle-1-font-size": 36
+      "text-subtitle-1-font-size": 32,
+      "text-subtitle-1-font-family": "DMSerifDisplay"
     }
   }

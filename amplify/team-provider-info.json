@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-campfire-dev-122129-authRole",
+      "UnauthRoleArn": "arn:aws:iam::996705024985:role/amplify-campfire-dev-122129-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::996705024985:role/amplify-campfire-dev-122129-authRole",
+      "Region": "ca-central-1",
+      "DeploymentBucketName": "amplify-campfire-dev-122129-deployment",
+      "UnauthRoleName": "amplify-campfire-dev-122129-unauthRole",
+      "StackName": "amplify-campfire-dev-122129",
+      "StackId": "arn:aws:cloudformation:ca-central-1:996705024985:stack/amplify-campfire-dev-122129/515e4250-08fe-11ec-8640-0e75e71712c2",
+      "AmplifyAppId": "d3v2rh0volp3qm"
+    },
+    "categories": {
+      "auth": {
+        "campfire3f6d0768": {}
+      }
+    }
+  }
+}
