@@ -10,7 +10,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Amplify from 'aws-amplify';
 import config from './src/aws-exports';
 import { AmplifyTheme, withAuthenticator } from 'aws-amplify-react-native';
-import HomeScreen from './app/screens/home';
+import Home from './app/screens/home';
+import Profile from './app/screens/profile';
+import { Ionicons } from '@expo/vector-icons';
+import Search from './app/screens/search';
 
 Amplify.configure({...config, Analytics: {disabled: true}});
 
@@ -39,9 +42,41 @@ function App() {
   return (
     <ApplicationProvider {...eva} theme={{ ...eva.dark, ...theme }} customMapping={mapping}>
       <NavigationContainer>
-        <Tab.Navigator initialRouteName="Home">
-          <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+        <Tab.Navigator 
+          initialRouteName="Home" 
+          screenOptions={({ route }) => ({
+            headerShown: false, 
+            tabBarShowLabel: false, 
+            tabBarActiveTintColor: theme['color-primary-200'], 
+            tabBarInactiveTintColor: theme['color-primary-300'], 
+            tabBarStyle: { backgroundColor: '#4E4456', borderTopWidth: 0 },
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+              if (route.name === 'Home') {
+                iconName = focused
+                  ? 'bonfire'
+                  : 'bonfire-outline';
+              } else if (route.name === 'SignIn') {
+                iconName = focused
+                  ? 'create'
+                  : 'create-outline';
+              } else if (route.name === 'Search') {
+                iconName = focused
+                  ? 'search'
+                  : 'search-outline';
+              } else if (route.name === 'Profile') {
+                iconName = focused
+                  ? 'person'
+                  : 'person-outline';
+              }
+              return <Ionicons name={iconName} size={size} color={color}/>;
+            }
+          })}
+        >
+          <Tab.Screen name="Home" component={Home} />
           <Tab.Screen name="SignIn" component={SignInScreen} />
+          <Tab.Screen name="Search" component={Search} />
+          <Tab.Screen name="Profile" component={Profile} />
         </Tab.Navigator>
       </NavigationContainer>
     </ApplicationProvider>

@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 import { StatusBar } from 'expo-status-bar';
 
-const HomeScreen = () => {
+const Home = () => {
   const [user, setUser] = useState();
   
   useEffect(() => {
@@ -34,7 +34,7 @@ const HomeScreen = () => {
             style={{ backgroundColor: theme['color-primary-500'] }}
           />
           <View style={styles.container}>
-            <Text category='p1'>Welcome back, . Here&apos;s what your friends are listening to:</Text>
+            <Text category='p1'>Welcome back, {user && user.email}. Here&apos;s what your friends are listening to:</Text>
             <StatusBar style='light' />
             <Button onPress={signOut}>Sign Out</Button>
           </View>
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default Home;
