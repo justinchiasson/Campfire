@@ -1,7 +1,6 @@
 import React from 'react';
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Text } from '@ui-kitten/components';
-import { View } from 'react-native';
+import { ApplicationProvider } from '@ui-kitten/components';
 import { default as theme } from './theme.json';
 import { default as mapping } from './mapping.json';
 import { useFonts } from 'expo-font';
@@ -10,20 +9,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Amplify from 'aws-amplify';
 import config from './src/aws-exports';
 import { AmplifyTheme, withAuthenticator } from 'aws-amplify-react-native';
-import Home from './app/screens/home';
-import Profile from './app/screens/profile';
+import Home from './app/screens/Home';
+import Profile from './app/screens/Profile';
 import { Ionicons } from '@expo/vector-icons';
-import Search from './app/screens/search';
+import Search from './app/screens/Search';
+import Journal from './app/screens/Journal';
+import { StatusBar } from 'expo-status-bar';
 
 Amplify.configure({...config, Analytics: {disabled: true}});
-
-function SignInScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Sign in</Text>
-    </View>
-  );
-}
 
 const Tab = createBottomTabNavigator();
 
@@ -41,6 +34,7 @@ function App() {
 
   return (
     <ApplicationProvider {...eva} theme={{ ...eva.dark, ...theme }} customMapping={mapping}>
+      <StatusBar style='light' />
       <NavigationContainer>
         <Tab.Navigator 
           initialRouteName="Home" 
@@ -56,7 +50,7 @@ function App() {
                 iconName = focused
                   ? 'bonfire'
                   : 'bonfire-outline';
-              } else if (route.name === 'SignIn') {
+              } else if (route.name === 'Journal') {
                 iconName = focused
                   ? 'create'
                   : 'create-outline';
@@ -74,7 +68,7 @@ function App() {
           })}
         >
           <Tab.Screen name="Home" component={Home} />
-          <Tab.Screen name="SignIn" component={SignInScreen} />
+          <Tab.Screen name="Journal" component={Journal} />
           <Tab.Screen name="Search" component={Search} />
           <Tab.Screen name="Profile" component={Profile} />
         </Tab.Navigator>

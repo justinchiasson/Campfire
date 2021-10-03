@@ -6,7 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Auth } from 'aws-amplify';
-import { StatusBar } from 'expo-status-bar';
+import StyledCard from '../../components/StyledCard';
 
 const Home = () => {
   const [user, setUser] = useState();
@@ -28,17 +28,18 @@ const Home = () => {
         colors={['#37313A', theme['color-primary-500']]}
         style={{ flex: 1 }}
       >
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
           <TopNavigation
             title={'Campfire'}
-            style={{ backgroundColor: theme['color-primary-500'] }}
+            style={{ backgroundColor: theme['color-primary-500'], marginTop: -10 }}
           />
+          <StyledCard>
+            <Text category='s2' style={styles.cardText}>Welcome back, {user && user.email}. Here&apos;s what your friends are listening to:</Text>
+          </StyledCard>
           <View style={styles.container}>
-            <Text category='p1'>Welcome back, {user && user.email}. Here&apos;s what your friends are listening to:</Text>
-            <StatusBar style='light' />
             <Button onPress={signOut}>Sign Out</Button>
           </View>
-        </SafeAreaView>
+        </View>
       </LinearGradient>
     </>
   );
@@ -54,6 +55,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  cardText: {
+    textAlign: 'center',
+    margin: -8
+  }
 });
 
 export default Home;

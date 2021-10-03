@@ -4,6 +4,9 @@
       "text-heading-1-font-size": 3,
       
       "text-subtitle-1-font-size": 32,
-      "text-subtitle-1-font-family": "DMSerifDisplay"
+      "text-subtitle-1-font-family": "DMSerifDisplay",
+
+      "text-subtitle-2-font-size": 14,
+      "text-subtitle-2-font-family": "DMSerifDisplay"
     }
   }
