@@ -28,10 +28,10 @@ const Home = () => {
         colors={['#37313A', theme['color-primary-500']]}
         style={{ flex: 1 }}
       >
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
           <TopNavigation
             title={'Campfire'}
-            style={{ backgroundColor: theme['color-primary-500'], marginTop: -10 }}
+            style={{ backgroundColor: theme['color-primary-500'], marginTop: -5 }}
           />
           <StyledCard>
             <Text category='s2' style={styles.cardText}>Welcome back, {user && user.email}. Here&apos;s what your friends are listening to:</Text>
@@ -39,7 +39,7 @@ const Home = () => {
           <View style={styles.container}>
             <Button onPress={signOut}>Sign Out</Button>
           </View>
-        </View>
+        </SafeAreaView>
       </LinearGradient>
     </>
   );
