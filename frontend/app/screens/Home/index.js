@@ -1,15 +1,32 @@
 import React from 'react';
-import { default as theme } from '../../../theme.json';
 import { TopNavigation, Text, Button } from '@ui-kitten/components';
-import { StyleSheet, View, SafeAreaView } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, View, Image, SafeAreaView } from 'react-native';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 import StyledCard from '../../components/StyledCard';
+import { ThemeContext } from '../../../theme-context';
 
 const Home = () => {
+  const themeContext = React.useContext(ThemeContext);
   const [user, setUser] = useState();
+
+  const renderTitle = () => (
+    <View style={styles.titleContainer}>
+      {themeContext.theme['theme-value'] === 'light' 
+        ? <Image style={styles.logo} source={require('../../assets/title-light.png')} />
+        : <Image style={styles.logo} source={require('../../assets/title-dark.png')} />
+      }
+    </View>
+  );
+
+  useEffect(() => {
+    const fetchAlbum = async () => {
+
+    };
+
+    fetchAlbum();
+  });
   
   useEffect(() => {
     const fetchUser = async () => {
@@ -23,24 +40,19 @@ const Home = () => {
   
   return (
     <>
-      <SafeAreaView style={{ flex: 0, backgroundColor: theme['color-primary-500'] }} />
-      <LinearGradient
-        colors={['#37313A', theme['color-primary-500']]}
-        style={{ flex: 1 }}
-      >
-        <SafeAreaView style={styles.container}>
-          <TopNavigation
-            title={'Campfire'}
-            style={{ backgroundColor: theme['color-primary-500'], marginTop: -5 }}
-          />
-          <StyledCard>
-            <Text category='s2' style={styles.cardText}>Welcome back, {user && user.email}. Here&apos;s what your friends are listening to:</Text>
-          </StyledCard>
-          <View style={styles.container}>
-            <Button onPress={signOut}>Sign Out</Button>
-          </View>
-        </SafeAreaView>
-      </LinearGradient>
+      <SafeAreaView style={{ flex: 0, backgroundColor: themeContext.theme['color-primary-500'] }} />
+      <SafeAreaView style={styles.container}>
+        <TopNavigation
+          title={renderTitle}
+          style={{ backgroundColor: themeContext.theme['color-primary-500'], marginTop: -5 }}
+        />
+        <StyledCard>
+          <Text category='s2' style={styles.cardText}>Welcome back, {user && user.email}. Here&apos;s what your friends are listening to:</Text>
+        </StyledCard>
+        <View style={styles.container}>
+          <Button onPress={signOut}>Sign Out</Button>
+        </View>
+      </SafeAreaView>
     </>
   );
 };
@@ -58,6 +70,15 @@ const styles = StyleSheet.create({
   cardText: {
     textAlign: 'center',
     margin: -8
+  },
+  titleContainer: {
+    flexDirection: 'row',
+    paddingLeft: 5
+  },
+  logo: {
+    width: 120,
+    maxHeight: 50,
+    resizeMode: 'contain'
   }
 });
 

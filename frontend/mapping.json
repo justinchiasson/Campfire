@@ -1,12 +1,12 @@
 {
     "strict": {
-      "text-font-family": "OpenSans",
+      "text-font-family": "PublicSans",
       "text-heading-1-font-size": 3,
       
-      "text-subtitle-1-font-size": 32,
-      "text-subtitle-1-font-family": "DMSerifDisplay",
+      "text-subtitle-1-font-size": 24,
+      "text-subtitle-1-font-family": "PublicSansBold",
 
       "text-subtitle-2-font-size": 16,
-      "text-subtitle-2-font-family": "DMSerifDisplay"
+      "text-subtitle-2-font-family": "PublicSansBold"
     }
   }
