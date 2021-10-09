@@ -3,7 +3,7 @@ import * as eva from '@eva-design/eva';
 import { ApplicationProvider } from '@ui-kitten/components';
 import { default as lightTheme } from './app/themes/theme-light.json';
 import { default as darkTheme } from './app/themes/theme-dark.json';
-import { default as mapping } from './mapping.json';
+import { default as mapping } from './app/themes/mapping.json';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
