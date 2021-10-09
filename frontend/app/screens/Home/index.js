@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 import StyledCard from '../../components/StyledCard';
-import { ThemeContext } from '../../../theme-context';
+import { ThemeContext } from '../../themes/theme-context';
 
 const Home = () => {
   const themeContext = React.useContext(ThemeContext);

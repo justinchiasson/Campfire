@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from '@ui-kitten/components';
 import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
-import { ThemeContext } from '../../../theme-context';
+import { ThemeContext } from '../../themes/theme-context';
 
 const StyledCard = ({ children }) => {
   const themeContext = React.useContext(ThemeContext);
@@ -20,7 +20,7 @@ const StyledCard = ({ children }) => {
       shadowOpacity: 0.25,
     }
   });
-  
+
   return(
     <View style={styles.container}>
       <Card style={styles.card} appearance='filled'>{children}</Card>

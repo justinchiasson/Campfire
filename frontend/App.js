@@ -1,8 +1,8 @@
 import React from 'react';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider } from '@ui-kitten/components';
-import { default as lightTheme } from './theme-light.json';
-import { default as darkTheme } from './theme-dark.json';
+import { default as lightTheme } from './app/themes/theme-light.json';
+import { default as darkTheme } from './app/themes/theme-dark.json';
 import { default as mapping } from './mapping.json';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
@@ -16,7 +16,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Search from './app/screens/Search';
 import Journal from './app/screens/Journal';
 import { StatusBar } from 'expo-status-bar';
-import { ThemeContext } from './theme-context';
+import { ThemeContext } from './app/themes/theme-context';
 
 Amplify.configure({...config, Analytics: {disabled: true}});
 
@@ -29,7 +29,6 @@ function App() {
     const nextTheme = theme === lightTheme ? darkTheme : lightTheme;
     setTheme(nextTheme);
   };
-
 
   const navigationTheme = {
     dark: false,
