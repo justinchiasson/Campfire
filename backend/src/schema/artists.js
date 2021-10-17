@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-export default gql `
+const artistSchema = gql `
   type Query {
     artists(search: String): [Artist!]
     artist(id: ID!): Artist!
@@ -14,7 +14,7 @@ export default gql `
 
   type ArtistAttributes {
     name: String!
-    genreNames: [String!]
+    genreNames: [String]
   }
 
   type ArtistRelationships {
@@ -29,3 +29,5 @@ export default gql `
     id: ID!
   }
 `;
+
+export default artistSchema;

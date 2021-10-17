@@ -1,16 +1,17 @@
 import cors from 'cors';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import artistSchema from './schema/artists.js'
 import artists from './resolvers/artists.js';
+import schema from './schema/index.js';
+import resolvers from './resolvers/index.js';
 import AppleMusicAPI from './apis/apple-music-api.js';
 
 const app = express();
 app.use(cors());
 
 const server = new ApolloServer({
-  typeDefs: artistSchema,
-  resolvers: artists,
+  typeDefs: schema,
+  resolvers: resolvers,
   dataSources: () => {
     return {
       appleMusicAPI: new AppleMusicAPI()
