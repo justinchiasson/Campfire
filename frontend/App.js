@@ -1,6 +1,6 @@
 import React from 'react';
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider } from '@ui-kitten/components';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { default as lightTheme } from './app/themes/theme-light.json';
 import { default as darkTheme } from './app/themes/theme-dark.json';
 import { default as mapping } from './app/themes/mapping.json';
@@ -17,10 +17,18 @@ import Search from './app/screens/Search';
 import Journal from './app/screens/Journal';
 import { StatusBar } from 'expo-status-bar';
 import { ThemeContext } from './app/themes/theme-context';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { SearchIcons } from './app/utils/icons/searchIcon';
 
 Amplify.configure({...config, Analytics: {disabled: true}});
 
 const Tab = createBottomTabNavigator();
+
+const client = new ApolloClient({
+  uri: 'http://192.168.1.103:8000/graphql',
+  cache: new InMemoryCache()
+});
 
 function App() {
   const [theme, setTheme] = React.useState(lightTheme);
@@ -45,7 +53,8 @@ function App() {
   // load fonts before attempting to display them
   let [loaded] = useFonts({
     PublicSansBold: require('./app/assets/fonts/PublicSans-Bold.ttf'),
-    PublicSans: require('./app/assets/fonts/PublicSans-Regular.ttf')
+    PublicSans: require('./app/assets/fonts/PublicSans-Regular.ttf'),
+    PublicSansBoldItalic: require('./app/assets/fonts/PublicSans-BoldItalic.ttf')
   });
 
   // TODO: loading?
@@ -54,50 +63,53 @@ function App() {
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <ApplicationProvider {...eva} theme={theme} customMapping={mapping}>
-        <StatusBar style={theme['theme-value'] === 'light' ? 'dark' : 'light'} />
-        <NavigationContainer theme={navigationTheme}>
-          <Tab.Navigator 
-            initialRouteName="Home"
-          
-            screenOptions={({ route }) => ({
-              headerShown: false, 
-              tabBarShowLabel: false, 
-              tabBarActiveTintColor: theme['text-basic-color'], 
-              tabBarInactiveTintColor: theme['text-basic-color-transparent'], 
-              tabBarStyle: { borderTopWidth: 0 },
-              tabBarIcon: ({ focused, color, size }) => {
-                let iconName;
-                if (route.name === 'Home') {
-                  iconName = focused
-                    ? 'bonfire'
-                    : 'bonfire-outline';
-                } else if (route.name === 'Journal') {
-                  iconName = focused
-                    ? 'create'
-                    : 'create-outline';
-                } else if (route.name === 'Search') {
-                  iconName = focused
-                    ? 'search'
-                    : 'search-outline';
-                } else if (route.name === 'Profile') {
-                  iconName = focused
-                    ? 'person'
-                    : 'person-outline';
+    <ApolloProvider client={client}>
+      <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <IconRegistry icons={SearchIcons} />
+        <ApplicationProvider {...eva} theme={theme} customMapping={mapping}>
+          <StatusBar style={theme['theme-value'] === 'light' ? 'dark' : 'light'} />
+          <SafeAreaView style={{ flex: 0, backgroundColor: theme['color-primary-500'] }} />
+          <NavigationContainer theme={navigationTheme}>
+            <Tab.Navigator 
+              initialRouteName="Home"
+              screenOptions={({ route }) => ({
+                headerShown: false, 
+                tabBarShowLabel: false, 
+                tabBarActiveTintColor: theme['text-basic-color'], 
+                tabBarInactiveTintColor: theme['text-basic-color-transparent'], 
+                tabBarStyle: { borderTopWidth: 0 },
+                tabBarIcon: ({ focused, color, size }) => {
+                  let iconName;
+                  if (route.name === 'Home') {
+                    iconName = focused
+                      ? 'bonfire'
+                      : 'bonfire-outline';
+                  } else if (route.name === 'Journal') {
+                    iconName = focused
+                      ? 'create'
+                      : 'create-outline';
+                  } else if (route.name === 'Search') {
+                    iconName = focused
+                      ? 'search'
+                      : 'search-outline';
+                  } else if (route.name === 'Profile') {
+                    iconName = focused
+                      ? 'person'
+                      : 'person-outline';
+                  }
+                  return <Ionicons name={iconName} size={size} color={color}/>;
                 }
-                return <Ionicons name={iconName} size={size} color={color}/>;
-              }
-            })}
-          >
-            <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="Journal" component={Journal} />
-            <Tab.Screen name="Search" component={Search} />
-            <Tab.Screen name="Profile" component={Profile} />
-          </Tab.Navigator>
-        </NavigationContainer>
-      </ApplicationProvider>
-    </ThemeContext.Provider>
+              })}
+            >
+              <Tab.Screen name="Home" component={Home} />
+              <Tab.Screen name="Journal" component={Journal} />
+              <Tab.Screen name="Search" component={Search} />
+              <Tab.Screen name="Profile" component={Profile} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </ApplicationProvider>
+      </ThemeContext.Provider>
+    </ApolloProvider>
   );
 }
 

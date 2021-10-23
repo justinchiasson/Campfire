@@ -1,12 +1,20 @@
 {
     "strict": {
       "text-font-family": "PublicSans",
-      "text-heading-1-font-size": 3,
+
+      "text-heading-1-font-family": "PublicSansBold",
+      "text-heading-1-font-size": 20,
       
-      "text-subtitle-1-font-size": 24,
+      "text-subtitle-1-font-size": 16,
       "text-subtitle-1-font-family": "PublicSansBold",
 
-      "text-subtitle-2-font-size": 16,
-      "text-subtitle-2-font-family": "PublicSansBold"
+      "text-subtitle-2-font-size": 12,
+      "text-subtitle-2-font-family": "PublicSansBold",
+
+      "text-heading-6-font-family": "PublicSansBoldItalic",
+      "text-heading-6-font-size": 12,
+
+      "text-heading-5-font-family": "PublicSansBold",
+      "text-heading-5-font-size": 14
     }
   }

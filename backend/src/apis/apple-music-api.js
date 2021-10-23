@@ -22,7 +22,7 @@ class AppleMusicAPI extends RESTDataSource {
 
   // search for multiple songs by search term
   async searchSongs(search) {
-    return this.get(`search?term=${encodeURIComponent(search)}&types=songs`);
+    return this.get(`search?term=${encodeURIComponent(search)}&limit=25&types=songs`);
   }
 
   // get 1 song by apple music ID

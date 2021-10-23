@@ -48,5 +48,6 @@
   "text-hint-color": "#fff",
   "text-basic-color": "#fff",
   "text-basic-color-transparent": "rgba(255, 255, 255, 0.75)",
+  "text-basic-color-more-transparent": "rgba(255, 255, 255, 0.5)",
   "color-basic-500": "#EFEBFA"
 }
