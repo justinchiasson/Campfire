@@ -1,6 +1,8 @@
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
+
+var width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
@@ -13,6 +15,16 @@ const styles = StyleSheet.create({
     height: 90,
     borderRadius: 4,
     margin: 10,
+  },
+  largeImage: {
+    width: 150,
+    height: 150,
+    borderRadius: 4,
+    margin: 10,
+  },
+  extraLargeImage: {
+    width: width,
+    height: 200,
   }
 });
 
@@ -23,15 +35,23 @@ const formatImageURL = (url, width, height) => {
 const AlbumArt = (props) => {
   const { url, width, height } = props.artwork;
 
+  let imageStyle = styles.image;
+  if (props.size === 'large') {
+    imageStyle = styles.largeImage;
+  } else if (props.size === 'extra-large') {
+    imageStyle = styles.extraLargeImage;
+  }
+
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{uri: formatImageURL(url, width, height)}}/>
+      <Image style={imageStyle} source={{uri: formatImageURL(url, width, height)}}/>
     </View>
   );
 };
 
 AlbumArt.propTypes = {
-  artwork: PropTypes.object.isRequired
+  artwork: PropTypes.object.isRequired,
+  size: PropTypes.oneOf(['large', 'extra-large']),
 };
 
 export default AlbumArt;

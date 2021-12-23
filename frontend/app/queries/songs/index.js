@@ -8,14 +8,36 @@ export const GET_SONGS = gql`
         albumName
         name
         artistName
-        genreNames
         artwork {
           url
           width
           height
         }
+        durationInMillis
         releaseDate
       }
+      type
+    }
+  }
+`;
+
+export const GET_SONG = gql`
+  query GetSong($id: ID!) {
+    song(id: $id) {
+      id
+      attributes {
+        albumName
+        name
+        artistName
+        artwork {
+          url
+          width
+          height
+        }
+        durationInMillis
+        releaseDate
+      }
+      type
     }
   }
 `;

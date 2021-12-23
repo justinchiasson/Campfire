@@ -30,18 +30,21 @@ const Home = () => {
   }, []);
   
   return (
-    <SafeAreaView style={styles.container}>
-      <TopNavigation
-        title={renderTitle}
-        style={{ backgroundColor: themeContext.theme['color-primary-500'], marginTop: -5 }}
-      />
-      <StyledCard>
-        <Text category='h5' style={styles.cardText}>Welcome back, {user && user.email}. Here&apos;s what your friends are listening to:</Text>
-      </StyledCard>
-      <View style={styles.container}>
-        <Button onPress={signOut}>Sign Out</Button>
-      </View>
-    </SafeAreaView>
+    <>
+      <SafeAreaView style={{ flex: 0, backgroundColor: themeContext.theme['color-primary-500'] }} />
+      <SafeAreaView style={styles.container}>
+        <TopNavigation
+          title={renderTitle}
+          style={{ backgroundColor: themeContext.theme['color-primary-500'], marginTop: -5 }}
+        />
+        <StyledCard>
+          <Text category='h5' style={styles.cardText}>Welcome back, {user && user.email}. Here&apos;s what your friends are listening to:</Text>
+        </StyledCard>
+        <View style={styles.container}>
+          <Button onPress={signOut}>Sign Out</Button>
+        </View>
+      </SafeAreaView>
+    </>
   );
 };
 

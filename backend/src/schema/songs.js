@@ -10,12 +10,14 @@ const songSchema = gql `
     id: ID!
     attributes: SongAttributes!
     relationships: SongRelationships
+    type: String!
   }
 
   type SongAttributes {
     albumName: String!
     artistName: String!
     artwork: AlbumArt
+    durationInMillis: Int
     name: String!
     genreNames: [String]
     releaseDate: String

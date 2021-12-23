@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import AlbumArt from '../AlbumArt';
 import PropTypes from 'prop-types';
 import { Divider, Text } from '@ui-kitten/components';
@@ -10,7 +10,7 @@ const SearchItem = (props) => {
 
   const styles = StyleSheet.create({
     container: {
-      flexDirection: 'row'
+      flexDirection: 'row',
     },
     textContainer: {
       marginRight: 10,
@@ -33,14 +33,14 @@ const SearchItem = (props) => {
 
   return (
     <View>
-      <View style={styles.container}>
+      <TouchableOpacity style={styles.container} onPress={() => props.handleClick(props.id, props.type)}>
         <AlbumArt artwork={props.attributes.artwork} />
         <View style={styles.textContainer}>
           <Text numberOfLines={1} category='s1'>{props.attributes.name}</Text>
           <Text numberOfLines={1} category='s2' style={styles.artistText}>{props.attributes.artistName}</Text>
           <Text numberOfLines={1} category='h6' style={styles.albumText}>{props.attributes.albumName}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
       <Divider style={styles.divider} />
     </View>
   );
@@ -48,6 +48,9 @@ const SearchItem = (props) => {
 
 SearchItem.propTypes = {
   attributes: PropTypes.object,
+  handleClick: PropTypes.func,
+  id: PropTypes.string,
+  type: PropTypes.string
 };
 
 export default SearchItem;

@@ -1,8 +1,10 @@
 import { useLazyQuery } from '@apollo/client';
+import { useNavigation } from '@react-navigation/core';
 import { Icon, Input, Text, TopNavigation } from '@ui-kitten/components';
 import { TouchableWithoutFeedback } from '@ui-kitten/components/devsupport';
 import React, { useContext, useEffect, useState } from 'react';
 import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import NoResults from '../../components/NoResults';
 import SearchItem from '../../components/SearchItem';
 import StyledSpinner from '../../components/StyledSpinner';
@@ -12,9 +14,11 @@ import { ThemeContext } from '../../themes/theme-context';
 const Search = () => {
   const [inputText, setInputText] = useState('');
   const themeContext = useContext(ThemeContext);
+  const insets = useSafeAreaInsets();
   const [handleSearch, { loading, error, data }] = useLazyQuery(GET_SONGS, {
     variables: { search: inputText },
   });
+  const navigation = useNavigation();
 
   const handleTextChange = (e) => {
     setInputText(e);
@@ -30,6 +34,14 @@ const Search = () => {
     }
   }, [inputText]);
 
+  const handleClickResult = (id, type) => {
+    if (type === 'songs') {
+      navigation.push('Song', {
+        songId: id
+      });
+    }
+  };
+
   let searchResult;
   if (loading) {
     searchResult = <StyledSpinner />;
@@ -37,9 +49,9 @@ const Search = () => {
     searchResult = <Text>Error: {error.message}</Text>;
   } else if (data) {
     if (data.songs) {
-      searchResult = data.songs.map((song, index) => {
+      searchResult = data.songs.map((song) => {
         return (
-          <SearchItem key={index} attributes={song.attributes} />
+          <SearchItem key={song.id} attributes={song.attributes} id={song.id} type={song.type} handleClick={handleClickResult} />
         ); 
       });
     } else {
@@ -48,6 +60,10 @@ const Search = () => {
   }
 
   const styles = StyleSheet.create({
+    unsafeArea: {
+      backgroundColor: themeContext.theme['color-primary-500'],
+      paddingTop: insets.top
+    },
     topBar: {
       backgroundColor: themeContext.theme['color-primary-500'],
       paddingBottom: 10,
@@ -84,10 +100,11 @@ const Search = () => {
 
   return (
     <>
+      <View style={styles.unsafeArea}/>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <TopNavigation
           title={renderTitle}
-          style={{ backgroundColor: themeContext.theme['color-primary-500'], marginTop: -5 }}
+          style={{ backgroundColor: themeContext.theme['color-primary-500'], marginTop: -15}}
         />
         <View style={styles.topBar}>
           <Input
