@@ -9,7 +9,6 @@
   "private": true,
   "dependencies": {
     "apollo-datasource-rest": "^3.3.0",
-    "apollo-server": "^3.3.0",
     "apollo-server-express": "^3.5.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
