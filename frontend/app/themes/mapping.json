@@ -21,6 +21,9 @@
       "text-heading-5-font-size": 14,
 
       "text-paragraph-2-font-family": "PublicSansLight",
-      "text-paragraph-2-font-size": 14
+      "text-paragraph-2-font-size": 14,
+
+      "text-caption-1-font-size": 12,
+      "text-caption-1-font-family": "PublicSansLight"
     }
   }

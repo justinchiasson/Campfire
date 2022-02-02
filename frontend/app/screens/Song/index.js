@@ -13,6 +13,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { ThemeContext } from '../../themes/theme-context';
 import Ratings from '../../components/Ratings';
 import YourRating from '../../components/YourRating';
+import YourReview from '../../components/YourReview';
 
 const Song = ({ route }) => {
   const { songId } = route.params;
@@ -59,6 +60,9 @@ const Song = ({ route }) => {
       <Divider style={styles.divider} />
       <YourRating />
       <Divider style={styles.divider} />
+      <YourReview />
+      <Divider style={styles.divider} />
+
     </ScrollView>
   );
 };

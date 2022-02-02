@@ -1,11 +1,13 @@
 import { Text } from '@ui-kitten/components';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import StarRating from 'react-native-star-rating-widget';
 import { ThemeContext } from '../../themes/theme-context';
-import RatingStars from '../RatingStars';
+import * as Haptics from 'expo-haptics';
 
 const YourRating = () => {
   const themeContext = useContext(ThemeContext);
+  const [rating, setRating] = useState(0);
 
   const styles = StyleSheet.create({
     title: {
@@ -20,11 +22,27 @@ const YourRating = () => {
     }
   });
 
+  useEffect(() => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  }, [rating]);
+
+  const changeRating = (rate) => {
+    if (rate !== rating) {
+      setRating(rate);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text category='p2' style={styles.title}>Your rating</Text>
       <View style={styles.ratingStars}>
-        <RatingStars rating={4.5} />
+        <StarRating 
+          rating={rating}
+          onChange={changeRating}
+          color={themeContext.theme['text-basic-color']}
+          starSize={40}
+          minRating={0}
+        />
       </View>
     </View>
   );

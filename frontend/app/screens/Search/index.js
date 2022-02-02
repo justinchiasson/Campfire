@@ -28,7 +28,7 @@ const Search = () => {
     if (inputText !== '') {
       const delaySearch = setTimeout(() => {
         handleSearch({ variables: { search: inputText } });
-      }, 1000);
+      }, 500);
   
       return () => clearTimeout(delaySearch);
     }
