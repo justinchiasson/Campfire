@@ -50,5 +50,7 @@
   "text-primary-color": "rgba(255, 255, 255, 0.5)",
   "text-basic-color-transparent": "rgba(255, 255, 255, 0.75)",
   "text-basic-color-more-transparent": "rgba(255, 255, 255, 0.5)",
-  "color-basic-500": "#EFEBFA"
+  "color-basic-500": "#EFEBFA",
+  "color-primary-500-transparent": "#342E37",
+  "text-control-color": "rgba(255, 255, 255, 0.5)"
 }

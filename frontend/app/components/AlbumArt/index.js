@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
   extraLargeImage: {
     width: width,
-    height: 200,
+    height: 400,
   }
 });
 

@@ -12,7 +12,6 @@ import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ThemeContext } from '../../themes/theme-context';
 import Ratings from '../../components/Ratings';
-import YourRating from '../../components/YourRating';
 import YourReview from '../../components/YourReview';
 
 const Song = ({ route }) => {
@@ -28,9 +27,15 @@ const Song = ({ route }) => {
       alignContent: 'center',
     },
     divider: {
-      backgroundColor: themeContext.theme['color-primary-500'],
+      backgroundColor: themeContext.theme['color-primary-500-transparent'],
       margin: 10
     },
+    scroller: {
+      marginTop: -400
+    },
+    spacer: {
+      height: 300,
+    }
   });
 
   if (loading) {
@@ -48,22 +53,22 @@ const Song = ({ route }) => {
   const maskElement = <LinearGradient style={{ flex: 1 }} colors={['black', 'transparent']} />;
 
   return (
-    <ScrollView bounces={false} >
+    <>
       <MaskedView maskElement={maskElement}>
         <View style={styles.headerImage}>
           <AlbumArt artwork={data.song.attributes.artwork} size={'extra-large'}/>
         </View>
       </MaskedView>
-      <SongTitle attributes={data.song.attributes} />
-      <Divider style={styles.divider} />
-      <Ratings />
-      <Divider style={styles.divider} />
-      <YourRating />
-      <Divider style={styles.divider} />
-      <YourReview />
-      <Divider style={styles.divider} />
-
-    </ScrollView>
+      <ScrollView bounces={true} style={styles.scroller} >
+        <View style={styles.spacer} />
+        <SongTitle attributes={data.song.attributes} />
+        <Divider style={styles.divider} />
+        <Ratings />
+        <Divider style={styles.divider} />
+        <YourReview songId={songId} />
+        <Divider style={styles.divider} />
+      </ScrollView>
+    </>
   );
 };
 

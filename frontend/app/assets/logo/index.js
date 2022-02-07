@@ -1,7 +1,7 @@
 import React from 'react';
 import { SvgXml } from 'react-native-svg';
 
-const Logo = () => {
+const LogoTest = () => {
   const svgMarkup = `<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
   width="900.000000pt" height="1401.000000pt" viewBox="0 0 900.000000 1401.000000"
   preserveAspectRatio="xMidYMid meet">
@@ -59,4 +59,4 @@ const Logo = () => {
   return <SvgImage />;
 };
 
-export default Logo;
+export default LogoTest;

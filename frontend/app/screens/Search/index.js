@@ -1,8 +1,8 @@
 import { useLazyQuery } from '@apollo/client';
-import { useNavigation } from '@react-navigation/core';
 import { Icon, Input, Text, TopNavigation } from '@ui-kitten/components';
 import { TouchableWithoutFeedback } from '@ui-kitten/components/devsupport';
 import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import NoResults from '../../components/NoResults';
@@ -11,14 +11,13 @@ import StyledSpinner from '../../components/StyledSpinner';
 import { GET_SONGS } from '../../queries/songs';
 import { ThemeContext } from '../../themes/theme-context';
 
-const Search = () => {
+const Search = ({ navigation }) => {
   const [inputText, setInputText] = useState('');
   const themeContext = useContext(ThemeContext);
   const insets = useSafeAreaInsets();
   const [handleSearch, { loading, error, data }] = useLazyQuery(GET_SONGS, {
     variables: { search: inputText },
   });
-  const navigation = useNavigation();
 
   const handleTextChange = (e) => {
     setInputText(e);
@@ -123,6 +122,10 @@ const Search = () => {
       </ScrollView>
     </>
   );
+};
+
+Search.propTypes = {
+  navigation: PropTypes.object
 };
 
 export default Search;

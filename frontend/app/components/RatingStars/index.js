@@ -19,21 +19,19 @@ const RatingStars = (props) => {
       position: 'absolute',
     },
     iconUnfocused: {
-      margin: -2,
       color: themeContext.theme['color-primary-500'],
     },
     icon: {
-      margin: -2,
       color: themeContext.theme['text-basic-color'],
     }
   });
 
   const noStars = <View style={styles.container}>
-    <MaterialCommunityIcons style={styles.iconUnfocused} name="star" size={40}/>
-    <MaterialCommunityIcons style={styles.iconUnfocused} name="star" size={40}/>
-    <MaterialCommunityIcons style={styles.iconUnfocused} name="star" size={40}/>
-    <MaterialCommunityIcons style={styles.iconUnfocused} name="star" size={40}/>
-    <MaterialCommunityIcons style={styles.iconUnfocused} name="star" size={40}/>
+    <MaterialCommunityIcons style={styles.iconUnfocused} name="star" size={15}/>
+    <MaterialCommunityIcons style={styles.iconUnfocused} name="star" size={15}/>
+    <MaterialCommunityIcons style={styles.iconUnfocused} name="star" size={15}/>
+    <MaterialCommunityIcons style={styles.iconUnfocused} name="star" size={15}/>
+    <MaterialCommunityIcons style={styles.iconUnfocused} name="star" size={15}/>
   </View>;
 
   const handleClick = () => {
@@ -43,91 +41,91 @@ const RatingStars = (props) => {
   const halfStar = <View style={styles.container}>
     {noStars}
     <View style={styles.containerAbsolute}>
-      <MaterialCommunityIcons style={styles.icon} name="star-half" size={40}/>
+      <MaterialCommunityIcons style={styles.icon} name="star-half" size={15}/>
     </View>
   </View>;
 
   const oneStar = <View style={styles.container}>
     {noStars}
     <View style={styles.containerAbsolute}>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
     </View>
   </View>;
 
   const oneAndAHalfStars = <View style={styles.container}>
     {noStars}
     <View style={styles.containerAbsolute}>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star-half" size={40}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star-half" size={15}/>
     </View>
   </View>;
 
   const twoStars = <View style={styles.container}>
     {noStars}
     <View style={styles.containerAbsolute}>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
     </View>
   </View>;
 
   const twoAndAHalfStars = <View style={styles.container}>
     {noStars}
     <View style={styles.containerAbsolute}>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star-half" size={40}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star-half" size={15}/>
     </View>
   </View>;
 
   const threeStars = <View style={styles.container}>
     {noStars}
     <View style={styles.containerAbsolute}>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
     </View>
   </View>;
 
   const threeAndAHalfStars = <View style={styles.container}>
     {noStars}
     <View style={styles.containerAbsolute}>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star-half" size={40}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star-half" size={15}/>
     </View>
   </View>;
 
   const fourStars = <View style={styles.container}>
     {noStars}
     <View style={styles.containerAbsolute}>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
     </View>
   </View>;
 
   const fourAndAHalfStars = <View style={styles.container}>
     {noStars}
     <View style={styles.containerAbsolute}>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
       <TouchableOpacity onPress={handleClick}>
-        <MaterialCommunityIcons style={styles.icon} name="star-half" size={40}/>
+        <MaterialCommunityIcons style={styles.icon} name="star-half" size={15}/>
       </TouchableOpacity>
     </View>
   </View>;
 
   const fiveStars = <View style={styles.container}>
     <View style={styles.container}>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
-      <MaterialCommunityIcons style={styles.icon} name="star" size={40}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
+      <MaterialCommunityIcons style={styles.icon} name="star" size={15}/>
     </View>
   </View>;
 

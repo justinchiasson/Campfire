@@ -13,7 +13,6 @@ import { AmplifyTheme, withAuthenticator } from 'aws-amplify-react-native';
 import Home from './app/screens/Home';
 import Profile from './app/screens/Profile';
 import { Ionicons } from '@expo/vector-icons';
-import Journal from './app/screens/Journal';
 import { StatusBar } from 'expo-status-bar';
 import { ThemeContext } from './app/themes/theme-context';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
@@ -85,27 +84,25 @@ function App() {
                       iconName = focused
                         ? 'bonfire'
                         : 'bonfire-outline';
-                    } else if (route.name === 'Journal') {
-                      iconName = focused
-                        ? 'create'
-                        : 'create-outline';
+                      size = 27;
                     } else if (route.name === 'SearchNavigator') {
                       iconName = focused
                         ? 'search'
                         : 'search-outline';
+                      size = 20;
                     } else if (route.name === 'Profile') {
                       iconName = focused
                         ? 'person'
                         : 'person-outline';
+                      size = 20;
                     }
                     return <Ionicons name={iconName} size={size} color={color}/>;
                   }
                 })}
               >
-                <Tab.Screen name="Home" component={Home} />
-                <Tab.Screen name="Journal" component={Journal} />
-                <Tab.Screen name="SearchNavigator" component={SearchNavigator} />
                 <Tab.Screen name="Profile" component={Profile} />
+                <Tab.Screen name="Home" component={Home} />
+                <Tab.Screen name="SearchNavigator" component={SearchNavigator} />
               </Tab.Navigator>
             </NavigationContainer>
           </SafeAreaProvider>
@@ -117,13 +114,13 @@ function App() {
 
 const customContainer = Object.assign({}, AmplifyTheme.container, { backgroundColor: lightTheme['color-primary-500'] });
 const customSectionHeaderText = Object.assign({}, AmplifyTheme.sectionHeaderText, { color: lightTheme['color-primary-100'] });
-const customButton = Object.assign({}, AmplifyTheme.button, { backgroundColor: '#3C3540' });
+const customButton = Object.assign({}, AmplifyTheme.button, { backgroundColor: lightTheme['color-primary-400'] });
 const customButtonText = Object.assign({}, AmplifyTheme.buttonText, { color: lightTheme['color-primary-100'] });
 const customInput = Object.assign({}, AmplifyTheme.input, { color: lightTheme['color-primary-300'], borderColor: lightTheme['color-primary-300'] });
 const customInputLabel = Object.assign({}, AmplifyTheme.inputLabel, { color: lightTheme['color-primary-100'] });
 const customSignedOutMessage = Object.assign({}, AmplifyTheme.signedOutMessage, { color: lightTheme['color-primary-100'] });
 const customSectionFooterLink = Object.assign({}, AmplifyTheme.sectionFooterLink, { color: lightTheme['color-primary-300'] });
-const customButtonDisabled = Object.assign({}, AmplifyTheme.buttonDisabled, { backgroundColor: '#37313A' });
+const customButtonDisabled = Object.assign({}, AmplifyTheme.buttonDisabled, { backgroundColor: lightTheme['color-primary-400'] });
 const authenticatorTheme = Object.assign({}, AmplifyTheme, {
   container: customContainer,
   sectionHeaderText: customSectionHeaderText,
