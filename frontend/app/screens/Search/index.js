@@ -5,17 +5,23 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import NoResults from '../../components/NoResults';
-import SearchItem from '../../components/SearchItem';
-import StyledSpinner from '../../components/StyledSpinner';
 import { GET_SONGS } from '../../queries/songs';
 import { ThemeContext } from '../../themes/theme-context';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { GET_ALBUMS } from '../../queries/albums';
+import { composeSearchResultAlbums, composeSearchResultSongs } from '../../utils/searchHelpers';
 
 const Search = ({ navigation }) => {
   const [inputText, setInputText] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState('songs');
   const themeContext = useContext(ThemeContext);
   const insets = useSafeAreaInsets();
-  const [handleSearch, { loading, error, data }] = useLazyQuery(GET_SONGS, {
+
+  const [handleSearchSongs, { loading: loadingSongs, error: songsError, data: songsData }] = useLazyQuery(GET_SONGS, {
+    variables: { search: inputText },
+  });
+
+  const [handleSearchAlbums, { loading: loadingAlbums, error: albumsError, data: albumsData }] = useLazyQuery(GET_ALBUMS, {
     variables: { search: inputText },
   });
 
@@ -25,13 +31,17 @@ const Search = ({ navigation }) => {
 
   useEffect(() => {
     if (inputText !== '') {
-      const delaySearch = setTimeout(() => {
-        handleSearch({ variables: { search: inputText } });
+      const delaySearch = setTimeout(() => {        
+        if (selectedFilter === 'songs') {
+          handleSearchSongs({ variables: { search: inputText } });
+        } else if (selectedFilter === 'albums') {
+          handleSearchAlbums({ variables: { search: inputText } });
+        }
       }, 500);
   
       return () => clearTimeout(delaySearch);
     }
-  }, [inputText]);
+  }, [inputText, selectedFilter]);
 
   const handleClickResult = (id, type) => {
     if (type === 'songs') {
@@ -42,20 +52,13 @@ const Search = ({ navigation }) => {
   };
 
   let searchResult;
-  if (loading) {
-    searchResult = <StyledSpinner />;
-  } else if (error) {
-    searchResult = <Text>Error: {error.message}</Text>;
-  } else if (data) {
-    if (data.songs) {
-      searchResult = data.songs.map((song) => {
-        return (
-          <SearchItem key={song.id} attributes={song.attributes} id={song.id} type={song.type} handleClick={handleClickResult} />
-        ); 
-      });
-    } else {
-      searchResult = <NoResults />;
-    }
+  switch (selectedFilter) {
+  case 'songs':
+    searchResult = composeSearchResultSongs(loadingSongs, songsError, songsData, handleClickResult);
+    break;
+  case 'albums':
+    searchResult = composeSearchResultAlbums(loadingAlbums, albumsError, albumsData, handleClickResult);
+    break;
   }
 
   const styles = StyleSheet.create({
@@ -65,28 +68,58 @@ const Search = ({ navigation }) => {
     },
     topBar: {
       backgroundColor: themeContext.theme['color-primary-500'],
-      paddingBottom: 10,
-      paddingHorizontal: 20
+      paddingHorizontal: 10,
     },
     searchIcon: {
       height: 20,
       tintColor: themeContext.theme['text-basic-color']
     },
     title: {
-      marginHorizontal: 10,
+      marginHorizontal: 5,
       marginBottom: -10
     },
     input: {
       backgroundColor: themeContext.theme['color-primary-400'],
-      borderRadius: 15,
-      borderColor: themeContext.theme['color-primary-400']
+      borderRadius: 10,
+      borderColor: themeContext.theme['color-primary-400'],
+    },
+    filterButton: {
+      backgroundColor: themeContext.theme['color-primary-400'],
+      borderRadius: 10,
+      borderColor: themeContext.theme['color-primary-400'],
+      borderWidth: 1,
+      padding: 8,
+      marginRight: 5,
+      marginTop: 2,
+      marginBottom: 7
+    },
+    selectedFilterButton: {
+      backgroundColor: themeContext.theme['color-primary-400'],
+      borderRadius: 10,
+      borderColor: 'white',
+      borderWidth: 1,
+      padding: 8,
+      marginRight: 5,
+      marginTop: 2,
+      marginBottom: 7
     },
     inputTextLight: {
-      color: themeContext.theme['text-basic-color']
+      color: themeContext.theme['color-basic-500']
     },
     inputTextDark: {
-      color: 'white'
-    }
+      color: 'white',
+    },
+    buttonTextLight: {
+      color: themeContext.theme['color-basic-500'],
+      fontSize: 12
+    },
+    buttonTextDark: {
+      color: 'white',
+      fontSize: 12
+    },
+    buttonContainer: {
+      flexDirection: 'row',
+    },
   });
 
   const SearchIcon = () => (
@@ -115,6 +148,32 @@ const Search = ({ navigation }) => {
             placeholderTextColor={themeContext.theme['color-primary-200']}
             onChangeText={handleTextChange}
           />
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity 
+              style={selectedFilter === 'songs' ? styles.selectedFilterButton : styles.filterButton}
+              onPress={() => setSelectedFilter('songs')}
+            >
+              <Text style={selectedFilter === 'songs' ? styles.buttonTextDark : styles.buttonTextLight}>Songs</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={selectedFilter === 'albums' ? styles.selectedFilterButton : styles.filterButton}
+              onPress={() => setSelectedFilter('albums')}
+            >
+              <Text style={selectedFilter === 'albums' ? styles.buttonTextDark : styles.buttonTextLight}>Albums</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={selectedFilter === 'artists' ? styles.selectedFilterButton : styles.filterButton}
+              onPress={() => setSelectedFilter('artists')}
+            >
+              <Text style={selectedFilter === 'artists' ? styles.buttonTextDark : styles.buttonTextLight}>Artists</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={selectedFilter === 'users' ? styles.selectedFilterButton : styles.filterButton}
+              onPress={() => setSelectedFilter('users')}
+            >
+              <Text style={selectedFilter === 'users' ? styles.buttonTextDark : styles.buttonTextLight}>Users</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </TouchableWithoutFeedback>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>

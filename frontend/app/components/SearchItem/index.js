@@ -4,6 +4,7 @@ import AlbumArt from '../AlbumArt';
 import PropTypes from 'prop-types';
 import { Divider, Text } from '@ui-kitten/components';
 import { ThemeContext } from '../../themes/theme-context';
+import { dateToYear } from '../../utils/dateTimeHelpers';
 
 const SearchItem = (props) => {
   const themeContext = useContext(ThemeContext);
@@ -31,19 +32,35 @@ const SearchItem = (props) => {
     }
   });
 
-  return (
-    <View>
-      <TouchableOpacity style={styles.container} onPress={() => props.handleClick(props.id, props.type)}>
-        <AlbumArt artwork={props.attributes.artwork} />
-        <View style={styles.textContainer}>
-          <Text numberOfLines={1} category='s1'>{props.attributes.name}</Text>
-          <Text numberOfLines={1} category='s2' style={styles.artistText}>{props.attributes.artistName}</Text>
-          <Text numberOfLines={1} category='h6' style={styles.albumText}>{props.attributes.albumName}</Text>
-        </View>
-      </TouchableOpacity>
-      <Divider style={styles.divider} />
-    </View>
-  );
+  if (props.type === 'songs') {
+    return (
+      <View>
+        <TouchableOpacity style={styles.container} onPress={() => props.handleClick(props.id, props.type)}>
+          <AlbumArt artwork={props.attributes.artwork} />
+          <View style={styles.textContainer}>
+            <Text numberOfLines={1} category='s1'>{props.attributes.name}</Text>
+            <Text numberOfLines={1} category='s2' style={styles.artistText}>{props.attributes.artistName}</Text>
+            <Text numberOfLines={1} category='h6' style={styles.albumText}>{props.attributes.albumName}</Text>
+          </View>
+        </TouchableOpacity>
+        <Divider style={styles.divider} />
+      </View>
+    );
+  } else if (props.type === 'albums') {
+    return (
+      <View>
+        <TouchableOpacity style={styles.container} onPress={() => props.handleClick(props.id, props.type)}>
+          <AlbumArt artwork={props.attributes.artwork} />
+          <View style={styles.textContainer}>
+            <Text numberOfLines={1} category='s1'>{props.attributes.name}</Text>
+            <Text numberOfLines={1} category='s2' style={styles.artistText}>{props.attributes.artistName}</Text>
+            <Text numberOfLines={1} category='h6' style={styles.albumText}>{dateToYear(props.attributes.releaseDate)}</Text>
+          </View>
+        </TouchableOpacity>
+        <Divider style={styles.divider} />
+      </View>
+    );
+  }
 };
 
 SearchItem.propTypes = {

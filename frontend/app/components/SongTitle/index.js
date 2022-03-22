@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 import AlbumArt from '../AlbumArt';
 import { ThemeContext } from '../../themes/theme-context';
+import { dateToYear, millisToMinutesAndSeconds } from '../../utils/dateTimeHelpers';
 
 const SongTitle = (props) => {
   const themeContext = useContext(ThemeContext);
@@ -43,25 +44,6 @@ const SongTitle = (props) => {
       marginTop: 8,
     },
   });
-
-  const millisToMinutesAndSeconds = (millis) => {
-    var minutes = Math.floor(millis / 60000);
-    var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return (
-      seconds == 60 ?
-        (minutes + 1) + ':00' :
-        minutes + ':' + (seconds < 10 ? '0' : '') + seconds
-    );
-  };
-
-  const dateToYear = (date) => {
-    const yearMonthDay = date.split('-');
-    if (yearMonthDay.length > 0) {
-      return yearMonthDay[0];
-    } else {
-      return '';
-    }
-  };
 
   const duration = millisToMinutesAndSeconds(props.attributes.durationInMillis);
   const year = dateToYear(props.attributes.releaseDate);

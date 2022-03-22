@@ -29,6 +29,16 @@ class AppleMusicAPI extends RESTDataSource {
   async getSongByID(id) {
     return this.get(`songs/${id}`);
   }
+
+  // search for multiple albums by search term
+  async searchAlbums(search) {
+    return this.get(`search?term=${encodeURIComponent(search)}&limit=25&types=albums`);
+  }
+
+  // get 1 album by apple music ID
+  async getAlbumByID(id) {
+    return this.get(`albums/${id}`);
+  }
 }
 
 export default AppleMusicAPI;

@@ -1,7 +1,6 @@
 import cors from 'cors';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import artists from './resolvers/artists.js';
 import schema from './schema/index.js';
 import resolvers from './resolvers/index.js';
 import AppleMusicAPI from './apis/apple-music-api.js';

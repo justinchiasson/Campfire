@@ -10,6 +10,7 @@ const artistSchema = gql `
     id: ID!
     attributes: ArtistAttributes!
     relationships: ArtistRelationships
+    type: String!
   }
 
   type ArtistAttributes {
