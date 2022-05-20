@@ -41,14 +41,27 @@ export const GET_ALBUM = gql`
         recordLabel
         copyright
         isSingle
-        editorialNotes
+        editorialNotes {
+          short
+        }
         contentRating
         genreNames
         releaseDate
       }
       relationships {
         tracks {
-          data
+          data {
+            id
+            attributes {
+              name
+              artistName
+              durationInMillis
+              releaseDate
+              discNumber
+              trackNumber
+              contentRating
+            }
+          }
         }
       }
       type

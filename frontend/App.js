@@ -26,7 +26,13 @@ const Tab = createBottomTabNavigator();
 
 const client = new ApolloClient({
   uri: 'http://localhost:8000/graphql',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({
+    typePolicies: {
+      SongAttributes: {
+        merge: true
+      }
+    }
+  })
 });
 
 function App() {

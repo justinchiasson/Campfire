@@ -48,6 +48,10 @@ const Search = ({ navigation }) => {
       navigation.push('Song', {
         songId: id
       });
+    } else if (type === 'albums') {
+      navigation.push('Album', {
+        albumId: id
+      });
     }
   };
 

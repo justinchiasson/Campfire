@@ -53,10 +53,16 @@ const SongTitle = (props) => {
       <View style={styles.textContainer}>
         <Text category='h1'>{props.attributes.name}</Text>
         <Text category='h3' style={styles.artistText}>{props.attributes.artistName}</Text>
-        <Text category='h3' style={styles.albumText}>{props.attributes.albumName}</Text>
+        {props.type === 'song' ? 
+          <Text category='h3' style={styles.albumText}>{props.attributes.albumName}</Text>
+          : <></>
+        }
         <View style={styles.details}>
-          <Text category='p2' style={styles.detailText}>{year} - </Text>
-          <Text category='p2' style={styles.detailText}>{duration}</Text>
+          <Text category='p2' style={styles.detailText}>{year}</Text>
+          {props.type === 'song' ? 
+            <Text category='p2' style={styles.detailText}> - {duration}</Text>
+            : <></>
+          }
         </View>
       </View>
       <View style={styles.filler} />
@@ -69,6 +75,7 @@ const SongTitle = (props) => {
 
 SongTitle.propTypes = {
   attributes: PropTypes.object,
+  type: PropTypes.string,
 };
 
 export default SongTitle;

@@ -21,6 +21,9 @@ const songSchema = gql `
     name: String!
     genreNames: [String]
     releaseDate: String
+    discNumber: Int
+    trackNumber: Int
+    contentRating: String
   }
 
   type AlbumArt {
