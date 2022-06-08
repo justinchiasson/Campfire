@@ -16,7 +16,7 @@ import Ratings from '../../components/Ratings';
 import YourReview from '../../components/YourReview';
 import TracksDropdown from '../../components/TracksDropdown';
 
-const Album = ({ route }) => {
+const Album = ({ route, navigation }) => {
   const { albumId } = route.params;
   const themeContext = useContext(ThemeContext);
   const { loading, error, data } = useQuery(GET_ALBUM, {
@@ -54,6 +54,14 @@ const Album = ({ route }) => {
 
   const maskElement = <LinearGradient style={{ flex: 1 }} colors={['black', 'transparent']} />;
 
+  const handleClickResult = (id, type) => {
+    if (type === 'songs') {
+      navigation.push('Song', {
+        songId: id
+      });
+    }
+  };
+
   return (
     <>
       <MaskedView maskElement={maskElement}>
@@ -65,7 +73,7 @@ const Album = ({ route }) => {
         <View style={styles.spacer} />
         <SongTitle attributes={data.album.attributes} type='album' />
         <Divider style={styles.divider} />
-        <TracksDropdown tracks={data.album.relationships.tracks} />
+        <TracksDropdown tracks={data.album.relationships.tracks} handleClick={handleClickResult} />
         <Divider style={styles.divider} />
         <Ratings />
         <Divider style={styles.divider} />
@@ -77,7 +85,8 @@ const Album = ({ route }) => {
 };
 
 Album.propTypes = {
-  route: PropTypes.object
+  route: PropTypes.object,
+  navigation: PropTypes.object
 };
 
 export default Album;

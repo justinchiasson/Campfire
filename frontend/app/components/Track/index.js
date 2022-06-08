@@ -26,7 +26,7 @@ const Track = (props) => {
 
   return (
     <View>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => props.handleClick(props.id, 'songs')}>
         <View style={styles.container}>
           <Text category='p2' style={styles.trackNumberText}>{props.attributes.trackNumber}</Text>
           <View>

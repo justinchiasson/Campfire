@@ -35,7 +35,7 @@ const TracksDropdown = (props) => {
   if (props.tracks?.data) {
     trackList = props.tracks.data.map((track) => {
       return (
-        <Track key={track.id} attributes={track.attributes} id={track.id} />
+        <Track key={track.id} attributes={track.attributes} id={track.id} handleClick={props.handleClick} />
       );
     });
   }
@@ -66,7 +66,8 @@ const TracksDropdown = (props) => {
 };
 
 TracksDropdown.propTypes = {
-  tracks: PropTypes.object
+  tracks: PropTypes.object,
+  handleClick: PropTypes.func
 };
 
 export default TracksDropdown;
