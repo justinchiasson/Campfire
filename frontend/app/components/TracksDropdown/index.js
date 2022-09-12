@@ -27,7 +27,8 @@ const TracksDropdown = (props) => {
     },
     titleContainer: {
       flexDirection: 'column',
-      alignItems: 'center'
+      alignItems: 'center',
+      marginBottom: 5
     }
   });
 

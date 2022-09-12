@@ -23,6 +23,7 @@
     "aws-amplify-react-native": "^5.0.3",
     "expo": "^44.0.0",
     "expo-auth-session": "~3.5.0",
+    "expo-blur": "~11.0.0",
     "expo-font": "~10.0.4",
     "expo-haptics": "~11.1.0",
     "expo-linear-gradient": "~11.0.0",

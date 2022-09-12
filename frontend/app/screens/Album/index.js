@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { ThemeContext } from '../../themes/theme-context';
 import { useQuery } from '@apollo/client';
 import { GET_ALBUM } from '../../queries/albums';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Animated } from 'react-native';
 import StyledSpinner from '../../components/StyledSpinner';
 import { Divider, Text } from '@ui-kitten/components';
 import NoResults from '../../components/NoResults';
@@ -15,6 +15,7 @@ import SongTitle from '../../components/SongTitle';
 import Ratings from '../../components/Ratings';
 import YourReview from '../../components/YourReview';
 import TracksDropdown from '../../components/TracksDropdown';
+import Header from '../../components/Header';
 
 const Album = ({ route, navigation }) => {
   const { albumId } = route.params;
@@ -22,6 +23,7 @@ const Album = ({ route, navigation }) => {
   const { loading, error, data } = useQuery(GET_ALBUM, {
     variables: { id: albumId },
   });
+  const scrollY = useRef(new Animated.Value(0)).current;
 
   const styles = StyleSheet.create({
     headerImage: {
@@ -33,11 +35,11 @@ const Album = ({ route, navigation }) => {
       margin: 10
     },
     scroller: {
-      marginTop: -400
+      marginTop: -400,
     },
     spacer: {
       height: 300,
-    }
+    },
   });
 
   if (loading) {
@@ -62,6 +64,24 @@ const Album = ({ route, navigation }) => {
     }
   };
 
+  const opacityBackground = scrollY.interpolate({
+    inputRange: [200, 220],
+    outputRange: [0, 0.65],
+    extrapolate: 'clamp'
+  });
+
+  const opacityBlur = scrollY.interpolate({
+    inputRange: [200, 220],
+    outputRange: [0, 50],
+    extrapolate: 'clamp'
+  });
+
+  const opacityTitle = scrollY.interpolate({
+    inputRange: [230, 250],
+    outputRange: [0, 1],
+    extrapolate: 'clamp'
+  });
+
   return (
     <>
       <MaskedView maskElement={maskElement}>
@@ -69,7 +89,15 @@ const Album = ({ route, navigation }) => {
           <AlbumArt artwork={data.album.attributes.artwork} size={'extra-large'}/>
         </View>
       </MaskedView>
-      <ScrollView bounces={true} style={styles.scroller} >
+      <ScrollView
+        bounces={true} 
+        style={styles.scroller}
+        scrollEventThrottle={16}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: false }
+        )} 
+      >
         <View style={styles.spacer} />
         <SongTitle attributes={data.album.attributes} type='album' />
         <Divider style={styles.divider} />
@@ -80,6 +108,14 @@ const Album = ({ route, navigation }) => {
         <YourReview songId={albumId} />
         <Divider style={styles.divider} />
       </ScrollView>
+      <Header 
+        title={data.album.attributes.name} 
+        opacityBackground={opacityBackground} 
+        opacityBlur={opacityBlur} 
+        opacityTitle={opacityTitle} 
+        navigation={navigation}
+        itemID={data.album.id}
+      />
     </>
   );
 };
