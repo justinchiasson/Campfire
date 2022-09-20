@@ -1,6 +1,6 @@
 import { Text } from '@ui-kitten/components';
 import React, { useContext } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import AlbumArt from '../AlbumArt';
 import { ThemeContext } from '../../themes/theme-context';
@@ -54,7 +54,9 @@ const SongTitle = (props) => {
         <Text category='h1'>{props.attributes.name}</Text>
         <Text category='h3' style={styles.artistText}>{props.attributes.artistName}</Text>
         {props.type === 'song' ? 
-          <Text category='h3' style={styles.albumText}>{props.attributes.albumName}</Text>
+          <TouchableOpacity onPress={() => props.handleClick()}>
+            <Text category='h3' style={styles.albumText}>{props.attributes.albumName}</Text>
+          </TouchableOpacity>
           : <></>
         }
         <View style={styles.details}>
@@ -66,9 +68,14 @@ const SongTitle = (props) => {
         </View>
       </View>
       <View style={styles.filler} />
-      <View style={styles.albumArt}>
-        <AlbumArt artwork={props.attributes.artwork} size={'large'} />
-      </View>
+      {props.type === 'song' ?
+        <TouchableOpacity style={styles.albumArt} onPress={() => props.handleClick()}>
+          <AlbumArt artwork={props.attributes.artwork} size={'large'} />
+        </TouchableOpacity>
+        : <View style={styles.albumArt}>
+          <AlbumArt artwork={props.attributes.artwork} size={'large'} />
+        </View>
+      }
     </View>
   );
 };
@@ -76,6 +83,7 @@ const SongTitle = (props) => {
 SongTitle.propTypes = {
   attributes: PropTypes.object,
   type: PropTypes.string,
+  handleClick: PropTypes.func,
 };
 
 export default SongTitle;

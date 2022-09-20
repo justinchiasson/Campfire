@@ -38,6 +38,18 @@ export const GET_SONG = gql`
         releaseDate
       }
       type
+      relationships {
+        albums {
+          data {
+            id
+          }
+        }
+        artists {
+          data {
+            id
+          }
+        }
+      }
     }
   }
 `;

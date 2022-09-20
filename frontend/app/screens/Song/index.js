@@ -52,6 +52,12 @@ const Song = ({ route, navigation }) => {
     return <NoResults />;
   }
 
+  const handleClickAlbum = () => {
+    navigation.push('Album', {
+      albumId: data.song.relationships.albums.data[0].id
+    });
+  };
+
   const maskElement = <LinearGradient style={{ flex: 1 }} colors={['black', 'transparent']} />;
 
   const opacityBackground = scrollY.interpolate({
@@ -89,7 +95,11 @@ const Song = ({ route, navigation }) => {
         )}
       >
         <View style={styles.spacer} />
-        <SongTitle attributes={data.song.attributes} type='song' />
+        <SongTitle
+          attributes={data.song.attributes}
+          type='song'
+          handleClick={handleClickAlbum}
+        />
         <Divider style={styles.divider} />
         <Ratings />
         <Divider style={styles.divider} />

@@ -30,6 +30,9 @@ const client = new ApolloClient({
     typePolicies: {
       SongAttributes: {
         merge: true
+      },
+      AlbumAttributes: {
+        merge: true
       }
     }
   })
