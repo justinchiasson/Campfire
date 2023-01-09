@@ -3,7 +3,7 @@ Campfire is an in-development social media application for rating, reviewing, an
 
 All design and development is currently being done by Justin Chiasson, a Vancouver-based software developer working at SAP Canada. 
 
-Version 1 is scheduled to release on the App Store and Google Play Store in Q2 2022. Check back for future updates!
+Version 1 is scheduled to release on the App Store and Google Play Store in Q2 2023. Check back for future updates!
 
 ### Stack
 
