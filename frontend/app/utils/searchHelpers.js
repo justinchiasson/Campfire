@@ -45,3 +45,24 @@ export const composeSearchResultAlbums = (loading, error, data, handler) => {
 
   return searchResult;
 };
+
+export const composeSearchResultArtists = (loading, error, data, handler) => {
+  let searchResult;
+  if (loading) {
+    searchResult = <StyledSpinner />;
+  } else if (error) {
+    searchResult = <Text>Error: {error.message}</Text>;
+  } else if (data) {
+    if (data.artists) {
+      searchResult = data.artists.map((artist) => {
+        return (
+          <SearchItem key={artist.id} attributes={artist.attributes} id={artist.id} type={artist.type} handleClick={handler} />
+        ); 
+      });
+    } else {
+      searchResult = <NoResults />;
+    }
+  }
+
+  return searchResult;
+};

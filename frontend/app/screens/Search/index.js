@@ -9,7 +9,8 @@ import { GET_SONGS } from '../../queries/songs';
 import { ThemeContext } from '../../themes/theme-context';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { GET_ALBUMS } from '../../queries/albums';
-import { composeSearchResultAlbums, composeSearchResultSongs } from '../../utils/searchHelpers';
+import { composeSearchResultAlbums, composeSearchResultArtists, composeSearchResultSongs } from '../../utils/searchHelpers';
+import { GET_ARTISTS } from '../../queries/artists';
 
 const Search = ({ navigation }) => {
   const [inputText, setInputText] = useState('');
@@ -25,6 +26,10 @@ const Search = ({ navigation }) => {
     variables: { search: inputText },
   });
 
+  const [handleSearchArtists, { loading: loadingArtists, error: artistsError, data: artistsData }] = useLazyQuery(GET_ARTISTS, {
+    variables: { search: inputText },
+  });
+
   const handleTextChange = (e) => {
     setInputText(e);
   };
@@ -36,6 +41,8 @@ const Search = ({ navigation }) => {
           handleSearchSongs({ variables: { search: inputText } });
         } else if (selectedFilter === 'albums') {
           handleSearchAlbums({ variables: { search: inputText } });
+        } else if (selectedFilter === 'artists') {
+          handleSearchArtists({ variables: {search: inputText }});
         }
       }, 500);
   
@@ -62,6 +69,9 @@ const Search = ({ navigation }) => {
     break;
   case 'albums':
     searchResult = composeSearchResultAlbums(loadingAlbums, albumsError, albumsData, handleClickResult);
+    break;
+  case 'artists':
+    searchResult = composeSearchResultArtists(loadingArtists, artistsError, artistsData, handleClickResult);
     break;
   }
 

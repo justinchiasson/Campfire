@@ -7,6 +7,11 @@ export const GET_ARTISTS = gql`
       attributes {
         name
         genreNames
+        artwork {
+          url
+          width
+          height
+        }
       }
       type
     }
@@ -20,6 +25,11 @@ export const GET_ARTIST = gql`
       attributes {
         name
         genreNames
+        artwork {
+          url
+          width
+          height
+        }
       }
       type
     }

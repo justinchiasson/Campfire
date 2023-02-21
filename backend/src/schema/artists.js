@@ -16,6 +16,18 @@ const artistSchema = gql `
   type ArtistAttributes {
     name: String!
     genreNames: [String]
+    artwork: ArtistArt
+  }
+
+  type ArtistArt {
+    bgColor: String
+    height: Int
+    textColor1: String
+    textColor2: String
+    textColor3: String
+    textColor4: String
+    url: String
+    width: Int
   }
 
   type ArtistRelationships {
